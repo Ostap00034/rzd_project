@@ -1,10 +1,18 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import { useState } from 'react'
+import { Button, StyleSheet, View } from 'react-native'
 
 export default function App() {
+	const [isStarted, setIsStarted] = useState(false)
+
 	return (
 		<View style={styles.container}>
-			<Text style={{ fontWeight: 'bold' }}>PIVO</Text>
+			<Button
+				onPress={() => {
+					setIsStarted(!isStarted)
+				}}
+				title={!isStarted ? 'Начать смену' : 'Закончить смену'}
+			/>
 			<StatusBar style='auto' />
 		</View>
 	)

@@ -1,9 +1,19 @@
 import { StatusBar } from 'expo-status-bar'
-import { useState } from 'react'
-import { Button, StyleSheet, View } from 'react-native'
+import { useEffect, useState } from 'react'
+import { Button, StyleSheet, View, Text } from 'react-native'
 
 export default function App() {
 	const [isStarted, setIsStarted] = useState(false)
+	const [time, setTime] = useState(0)
+
+	useEffect(() => {
+		if (isStarted) {
+			setTimeout(setTime, 1000, time + 1)
+		} else {
+			setIsStarted(false)
+			setTime(0)
+		}
+	}, [time, isStarted])
 
 	return (
 		<View style={styles.container}>
@@ -13,6 +23,13 @@ export default function App() {
 				}}
 				title={!isStarted ? 'Начать смену' : 'Закончить смену'}
 			/>
+			<Text
+				style={{
+					fontSize: 18,
+				}}
+			>
+				{time}
+			</Text>
 			<StatusBar style='auto' />
 		</View>
 	)
